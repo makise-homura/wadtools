@@ -8,6 +8,7 @@ Tiny tools for creating and unpacking WAD files under Linux
     gcc wadbuild.c  -o wadbuild
     gcc wadxtract.c -o wadxtract
     gcc wadpack.c -o wadpack
+    gcc wadfindthing.c -o wadfindthing
 
 Of course, you may build any tool you need instead of all.
 
@@ -15,7 +16,7 @@ Of course, you may build any tool you need instead of all.
 
 Set `$PREFIX` to, for example, `/usr` or `/usr/local`, or somewhat else.
 
-    sudo cp wadbuild wadxtract wadpack $PREFIX/bin
+    sudo cp wadbuild wadxtract wadpack wadfindthing $PREFIX/bin
 
 ## Invocation
 
@@ -104,3 +105,19 @@ Example:
     wadpack mywad.wad ./output
 
 Builds `mywad.wad` from `./output` directory that was created by `wadxtract` call.
+
+### Find a THING inside some map of WAD file:
+
+    wadfindthing <wadfile> <version> <thing type>
+
+* `wadfile`  - filename of wadfile to look for things in;
+
+* `version` - expected version of THINGS lump: d for DOOM, h for Hexen;
+
+* `thing type` - decimal number of thing type.
+
+Example:
+
+    wadfindthing mywad.wad h 9058
+
+This looks for thing with type 9058 inside every map of `mywad.wad` which contains maps in Hexen format.
