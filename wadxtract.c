@@ -95,6 +95,7 @@ int main(int argc, char *argv[])
 		sprintf(filename, "%s/%04u_%s.lmp", path, i + 1, sane_lumpname);
 		printf("    Extracting %-8s [offset 0x%08X, size %10lu] -> %s ... ", lumpname, directory[i].start, directory[i].size, filename);
 		FILE  *lumpfile_f = fopen(filename,"w");
+		if(lumpfile_f == NULL) {fprintf(stderr, "Error opening %s.\n", filename); return 1;}
 		if (directory[i].size > 0)
 		{
 			void  *lumpdata = malloc(directory[i].size);

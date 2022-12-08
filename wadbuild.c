@@ -90,10 +90,12 @@ int main(int argc, char *argv[])
 		if (archive[i].filesize > 0)
 		{
 			FILE  *lumpfile_f = fopen(archive[i].filename,"r");
+			if(lumpfile_f == NULL) {fprintf(stderr, "Error opening %s.\n", archive[i].filename); return 1;}
 			void  *lumpdata   = malloc(archive[i].filesize);
 			fread (lumpdata, 1, archive[i].filesize, lumpfile_f);
 			fwrite(lumpdata, 1, archive[i].filesize, wadfile_f);
 			free  (lumpdata);
+			fclose(lumpfile_f);
 		}
 	}
 	fclose(wadfile_f);
