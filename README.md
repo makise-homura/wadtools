@@ -7,16 +7,19 @@ Tiny tools for creating and unpacking WAD files under Linux
 
     gcc wadbuild.c  -o wadbuild
     gcc wadxtract.c -o wadxtract
+    gcc wadpack.c -o wadpack
+
+Of course, you may build any tool you need instead of all.
 
 ### Installing
 
 Set `$PREFIX` to, for example, `/usr` or `/usr/local`, or somewhat else.
 
-    sudo cp wadbuild wadxtract $PREFIX/bin
+    sudo cp wadbuild wadxtract wadpack $PREFIX/bin
 
 ## Invocation
 
-### Create WAD file:
+### Create WAD file from separate lumps:
 
     wadbuild <wadfile> <filename> <lumpname> [<filename> <lumpname>...]
 
@@ -82,3 +85,22 @@ Say, we have a file we created before, it will be decompressed to following file
 * `0005_A_END.lmp` - empty file;
 
 * `0006_ACSLIB.lmp` - what has been known as `acslib.acs` file.
+
+### Pack WAD file back:
+
+    wadpack <wadfile> <directory>
+
+
+* `wadfile` - filename of newly created wadfile (will be overwritten if exist);
+
+* `directory` - path from where to read extracted lumps (specify `.` to read from the current directory).
+
+The only files to be packed are those whose names start with four digits followed by underscore. Lump name will inherit file name part starting with 6th character. Any part after `.` character is ignored, as well as any characters that could make lump name longer than 8 bytes.
+
+Note: Special characters (`[`, `]`, `\`) are not restored! These lumps will have `_` in their name inside the WAD file.
+
+Example:
+
+    wadpack mywad.wad ./output
+
+Builds `mywad.wad` from `./output` directory that was created by `wadxtract` call.
