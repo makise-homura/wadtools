@@ -1,5 +1,5 @@
 # wadtools
-Tiny tools for creating and unpacking WAD files under Linux
+Tiny tools for creating and unpacking DOOM/Heretic/Hexen/etc. WAD files under Linux
 
 ## Build
 

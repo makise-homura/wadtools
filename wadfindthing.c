@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
 		case 0x44415750: /* PWAD */
 			printf("PWAD, "); break;
 		default:
-			printf("Unknown header magic: %lX.\n", *(uint32_t*)header.identifier);
+			printf("Unknown header magic: %lX. Probably it's not a file of DOOM WAD format.\n", *(uint32_t*)header.identifier);
 			fclose(wadfile_f);
 			return 3;
 	}
